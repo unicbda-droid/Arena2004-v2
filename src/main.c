@@ -3364,17 +3364,20 @@ static void run_selftest(App* a) {
         g->start_countdown = 0.0f;
         g->paused = false;
 
-        int node = game_nav_nearest(g, p->pos, 12.0f);
+        int node = game_nav_nearest(g, p->pos, 50.0f);
         Vec3 target = p->pos;
         bool have_target = false;
         if (node >= 0) {
             NavNode* nn = &g->nav.nodes[node];
+            /* place player on the nav node so movement test has a reliable start */
+            p->pos = nn->pos;
+            p->pos.y += 0.95f;
             for (int k = 0; k < nn->nn; k++) {
                 int j = nn->nb[k];
                 if (j < 0 || j >= g->nav.count) continue;
                 Vec3 d = v3sub(g->nav.nodes[j].pos, p->pos);
                 float h = sqrtf(d.x * d.x + d.z * d.z);
-                if (h > 1.5f && h < 12.0f) { target = g->nav.nodes[j].pos; have_target = true; break; }
+                if (h > 1.5f && h < 15.0f) { target = g->nav.nodes[j].pos; have_target = true; break; }
             }
         }
         if (have_target) {
