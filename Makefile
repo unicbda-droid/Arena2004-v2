@@ -13,7 +13,8 @@ else
 endif
 
 GAME_SRC := src/gl_util.c src/ui.c src/world.c src/render.c src/game.c \
-            src/hud.c src/audio.c src/editor.c src/net.c src/console.c src/steam_bridge.c src/main.c
+            src/hud.c src/audio.c src/editor.c src/net.c src/console.c src/steam_bridge.c \
+            src/main.c src/obj_loader.c
 GAME_OBJ := $(GAME_SRC:src/%.c=build/%.o)
 GAME_DEP := $(GAME_OBJ:.o=.d)
 LOB_OBJ  := build/lobby.o
